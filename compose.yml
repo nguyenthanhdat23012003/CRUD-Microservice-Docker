@@ -1,0 +1,79 @@
+version: "3"
+
+services:
+  nginx: 
+    container_name: nginx
+    image: nginx:latest
+    ports:
+      - "80:80"
+    configs:
+      - source: default.conf
+        target: /etc/nginx/conf.d/default.conf
+    depends_on:
+      - node
+      - springboot
+    networks:
+      - app
+
+  springboot:
+    container_name: 
+      springboot
+    build:
+      context: ./springboot
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"
+    networks:
+      - app
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  node:
+    container_name: 
+      node
+    build:
+      context: ./node
+      dockerfile: Dockerfile
+    ports:
+      - "8080:3000"
+    networks:
+      - app
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    container_name: mysql
+    image: "mysql:8.0"
+    environment:
+      MYSQL_ROOT_PASSWORD: 122002
+      MYSQL_DATABASE: db_example
+      MYSQL_USER: hody
+      MYSQL_PASSWORD: 122002
+    command: --init-file /my-config
+    configs:
+      - source: my-config
+        target: /my-config
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3306"]
+      interval: 1s
+      retries: 3
+      start_period: 25s
+    volumes:
+      - mysql-data:/var/liv/mysql
+    networks: 
+      - app
+  
+volumes: 
+  mysql-data:
+
+configs:
+  my-config: 
+    file: ./node/my-config
+  default.conf:
+    file: ./nginx/default.conf
+
+networks:
+  app:
+    name: app
