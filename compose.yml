@@ -14,6 +14,7 @@ services:
       - springboot
     networks:
       - app
+    restart: on-failure
 
   springboot:
     container_name: 
@@ -26,9 +27,9 @@ services:
     networks:
       - app
     depends_on:
-      mysql:
-        condition: service_healthy
-
+      - mysql
+        # condition: service_healthy
+    restart: on-failure
   node:
     container_name: 
       node
@@ -40,8 +41,9 @@ services:
     networks:
       - app
     depends_on:
-      mysql:
-        condition: service_healthy
+      - mysql
+        # condition: service_healthy
+    restart: on-failure
 
   mysql:
     container_name: mysql
@@ -55,11 +57,11 @@ services:
     configs:
       - source: my-config
         target: /my-config
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3306"]
-      interval: 1s
-      retries: 3
-      start_period: 25s
+    # healthcheck:
+    #   test: ["CMD", "curl", "-f", "http://localhost:3306"]
+    #   interval: 1s
+    #   retries: 3
+    #   start_period: 25s
     volumes:
       - mysql-data:/var/liv/mysql
     networks: 
