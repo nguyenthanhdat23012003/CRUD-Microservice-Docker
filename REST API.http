@@ -1,0 +1,15 @@
+# get http://localhost:80/node    
+post http://localhost:80/node HTTP/1.1
+Content-Type: application/json
+# 
+{
+    "title": "Hody Nguyen",
+    "description": "Test docker compose",
+    "published": true
+}
+
+
+
+# get http://localhost:80/springboot
+
+post http://localhost:80/java/add?name=hody&email=nguyenthanhdat23012003@gmail.com&age=21
