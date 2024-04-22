@@ -1,0 +1,1 @@
+Try spring, node, nginx, mysql with docker compose
