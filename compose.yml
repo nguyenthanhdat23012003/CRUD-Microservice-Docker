@@ -37,7 +37,7 @@ services:
       context: ./node
       dockerfile: Dockerfile
     ports:
-      - "8080:3000"
+      - "8082:3000"
     networks:
       - app
     depends_on:
