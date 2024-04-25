@@ -11,3 +11,4 @@ Docker compose up -d
 Docker compose down -v
 
 - Test add Jenkins
+- Test commit Jenkins
