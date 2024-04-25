@@ -9,3 +9,5 @@ Docker compose up -d
 
 - Stop application
 Docker compose down -v
+
+- Test add Jenkins
