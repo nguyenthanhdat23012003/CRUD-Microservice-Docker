@@ -5,7 +5,7 @@ pipeline {
             steps {
                 git 'https://github.com/nguyenthanhdat23012003/CRUD-Microservice-Docker.git'
             }
-        }
+        } 
         stage('Run') {
             steps {
                 sh 'docker compose build; docker compose up'  
