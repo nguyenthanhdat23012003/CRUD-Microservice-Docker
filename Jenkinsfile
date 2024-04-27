@@ -3,7 +3,7 @@ pipeline {
     stages {
         stage('Clone') {
             steps {
-                git 'https://github.com/nguyenthanhdat23012003/CRUD-Microservice-Docker.git'
+                git 'https://github.com/nguyenthanhdat23012003/CRUD-Microservice-Docker'
             }
         } 
         // stage('Run') {
