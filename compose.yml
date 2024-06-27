@@ -63,7 +63,7 @@ services:
     #   retries: 3
     #   start_period: 25s
     volumes:
-      - mysql-data:/var/liv/mysql
+      - mysql-data:/var/lib/mysql
     networks: 
       - app
   
